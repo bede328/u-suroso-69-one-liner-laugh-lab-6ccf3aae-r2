@@ -19,6 +19,11 @@ if (LINE.trim().length === 0) {
 if (LINE.includes("\n") || LINE.includes("\r")) {
   throw new Error("entry must be a single line");
 }
+// The judge's first criterion is answering the prompt: the excuse must be
+// about the sock the vacuum ate. A line that never names it cannot win.
+if (!/\bsock\b/i.test(LINE)) {
+  throw new Error("entry must name the sock it excuses");
+}
 
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", LINE, "utf8");
